@@ -1,0 +1,6 @@
+galaxy_info:
+  author: fmind
+  description: setup ssh
+
+dependencies:
+  - {role: dev-sec.ssh-hardening}

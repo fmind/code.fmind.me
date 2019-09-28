@@ -1,0 +1,7 @@
+---
+
+- name: group
+  group: name='{{sftp_group}}' system=true
+
+- name: service
+  service: name='ssh' state='started' enabled=true

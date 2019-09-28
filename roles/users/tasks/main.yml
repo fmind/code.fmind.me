@@ -1,0 +1,14 @@
+---
+
+- name: root
+  user: name='root' shell='/sbin/nologin'
+
+- name: packages
+  package: name='{{item}}'
+  with_items:
+    - git
+    - vim
+    - ansible
+
+- name: permissions
+  file: path='/home/{{me_user}}' owner='{{me_user}}' group='{{me_user}}' mode='u=rwX,g-rwx,o-rwx' recurse=true

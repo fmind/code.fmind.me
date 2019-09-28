@@ -1,0 +1,12 @@
+#!/bin/bash
+
+# BASES
+(sudo -u postgres pg_dumpall -c) | gzip > '/var/backups/postgres.sql.gz'
+# SHARE
+tar -czf '/var/backups/nbshares.tar.gz' '{{hub_srv}}'
+# HOMES
+tar -czf '/var/backups/userhome.tar.gz' '/home'
+# PERMS
+chmod 600 /var/backups/postgres.sql.gz
+chmod 600 /var/backups/nbshares.tar.gz
+chmod 600 /var/backups/userhome.tar.gz

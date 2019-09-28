@@ -1,0 +1,21 @@
+---
+
+- hosts: code.fmind.me
+  become: true
+
+  roles:
+    # SYSTEM {{{
+    - {role: linux, tags: ['linux', 'system']}
+    - {role: users, tags: ['users', 'system']}
+    - {role: certs, tags: ['certs', 'system']}
+    - {role: backs, tags: ['backs', 'system']}
+    # }}}
+    # SERVICE {{{
+    - {role: ssh, tags: ['ssh', 'service']}
+    - {role: sql, tags: ['sql', 'service']}
+    - {role: hub, tags: ['hub', 'service']}
+    # }}}
+    # MEMBERS {{{
+    - {role: teachers, tags: ['teachers', 'members']}
+    - {role: students, tags: ['students', 'members']}
+    # }}}

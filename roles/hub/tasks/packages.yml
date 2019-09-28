@@ -1,0 +1,32 @@
+---
+
+- name: packages sys
+  package: name='{{item}}'
+  with_items:
+    - npm
+    - whois
+    - unzip
+    - nodejs
+    - python3
+    - libpq-dev
+    - python3-dev
+    - python3-pip
+
+- name: packages pip
+  pip: name='{{item}}' executable='pip3'
+  with_items:
+    - RISE
+    - notebook
+    - nbgrader
+    - psycopg2
+    - jupyterhub
+    - jupyterhub-systemdspawner
+    - jupyter_contrib_nbextensions
+
+- name: packages npm
+  npm: name='{{item}}' global=yes
+  with_items:
+    - configurable-http-proxy
+
+- name: packages perms
+  file: path='/usr/local/lib' mode='u=rwX,g+rX,o+rX' recurse=true

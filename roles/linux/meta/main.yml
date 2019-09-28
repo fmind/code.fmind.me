@@ -1,0 +1,7 @@
+galaxy_info:
+  author: fmind
+  description: setup linux
+
+dependencies:
+  - {role: dev-sec.os-hardening}
+  - {role: jnv.unattended-upgrades}

@@ -1,0 +1,8 @@
+---
+
+- name: extensions install
+  command: 'jupyter contrib nbextension install --sys-prefix --overwrite'
+
+- name: extensions enable
+  command: 'jupyter nbextension enable --sys-prefix {{item}}'
+  with_items: '{{hub_extensions}}'

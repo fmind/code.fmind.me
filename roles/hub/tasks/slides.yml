@@ -1,0 +1,7 @@
+---
+
+- name: slides install
+  command: 'jupyter nbextension install --sys-prefix --py rise --overwrite'
+
+- name: slides enable
+  command: 'jupyter nbextension enable --sys-prefix --py rise'

@@ -1,0 +1,9 @@
+---
+
+- name: postgresql user
+  postgresql_user: name='{{hub_sql}}' password='{{hub_pass}}' role_attr_flags='CREATEDB' encrypted=true
+  become_user: 'postgres'
+
+- name: postgresql base
+  postgresql_db: name='{{hub_sql}}' owner='{{hub_sql}}'
+  become_user: 'postgres'

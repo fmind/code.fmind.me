@@ -1,0 +1,15 @@
+[Unit]
+Description=Hub
+After=syslog.target network.target
+
+[Service]
+Type=simple
+RestartSec=10
+Restart=always
+User={{hub_user}}
+Group={{hub_group}}
+StandardOutput=file:{{hub_log}}
+ExecStart=/usr/local/bin/jupyterhub -f {{hub_conf}}
+
+[Install]
+WantedBy=multi-user.target

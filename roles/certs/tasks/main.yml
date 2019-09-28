@@ -1,0 +1,10 @@
+---
+
+- name: private
+  openssl_privatekey: path='{{cert_private}}' mode='0640'
+
+- name: request
+  openssl_csr: path='{{cert_request}}' privatekey_path='{{cert_private}}' common_name='{{me_site}}' mode='0640'
+
+- name: certificate
+  openssl_certificate: path='{{cert_public}}' privatekey_path='{{cert_private}}' csr_path='{{cert_request}}' provider='selfsigned' mode='0640'

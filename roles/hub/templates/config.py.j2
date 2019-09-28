@@ -1,0 +1,31 @@
+c = get_config()
+# APP
+c.JupyterHub.admin_access = True
+# WEB
+c.NotebookApp.allow_origin = '*'
+c.JupyterHub.bind_url = '{{hub_proxy}}'
+c.JupyterHub.ssl_cert = '{{cert_public}}'
+c.JupyterHub.ssl_key = '{{cert_private}}'
+c.JupyterHub.cookie_secret = b'{{hub_cook}}'
+# SQL
+c.JupyterHub.upgrade_db = True
+c.JupyterHub.db_url = 'postgresql://{{hub_sql}}:{{hub_pass}}@127.0.0.1/{{hub_sql}}'
+# AUTH
+c.JupyterHub.authenticator_class = 'jupyterhub.auth.PAMAuthenticator'
+c.Authenticator.admin_users = set([
+{% for teacher in teachers_users %}
+  '{{teacher.user}}',
+{% endfor %}
+])
+# SPAWN
+c.JupyterHub.spawner_class = 'systemdspawner.SystemdSpawner'
+c.SystemdSpawner.mem_limit = '{{hub_mem}}'
+c.SystemdSpawner.isolate_tmp = True
+c.SystemdSpawner.isolate_devices = True
+c.SystemdSpawner.disable_user_sudo = True
+c.SystemdSpawner.readonly_paths = ['/']
+c.SystemdSpawner.readwrite_paths = [
+  '{{hub_srv}}',
+  '/home/{USERNAME}',
+]
+c.SystemdSpawner.default_shell = '/bin/bash'

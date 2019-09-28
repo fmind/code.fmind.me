@@ -1,0 +1,45 @@
+---
+# vim: foldmethod=marker
+# ME {{{
+me_user: 'fmind'
+me_site: 'code.fmind.me'
+# }}}
+# SSH {{{
+sftp_enabled: true
+sftp_group: 'sftponly'
+sftp_chroot_dir: '/home'
+ssh_print_last_log: true
+ssh_max_auth_retries: 10
+ssh_server_password_login: true
+# }}}
+# CERTS {{{
+cert_public: '/etc/ssl/self.crt'
+cert_request: '/etc/ssl/self.crs'
+cert_private: '/etc/ssl/private/self.pem'
+# }}}
+# LINUX {{{
+sysctl_overwrite:
+  net.ipv6.conf.lo.disable_ipv6: 1
+  net.ipv6.conf.all.disable_ipv6: 1
+  net.ipv6.conf.default.disable_ipv6: 1
+os_auth_pw_max_age: 99999
+os_security_users_allow: ['{{me_user}}']
+# }}}
+# SQL {{{
+postgresql_pg_hba_default:
+  - {type: local, database: all, user: 'postgres', address: '', method: 'peer'}
+  - {type: host, database: all, user: all, address: '127.0.0.1/32', method: 'md5'}
+# }}}
+# HUB {{{
+hub_mem: '1G'
+hub_user: 'root'
+hub_group: 'hub'
+hub_sql: 'jupyterhub'
+hub_srv: '/srv/nbgrader'
+hub_log: '/var/log/hub.log'
+hub_conf: '/etc/hub/conf.py'
+hub_serv: '/etc/systemd/system/hub.service'
+hub_proxy: 'https://{{me_site}}:443'
+hub_extensions:
+  - 'export_embedded/main'
+# }}}

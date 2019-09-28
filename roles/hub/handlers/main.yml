@@ -1,0 +1,4 @@
+---
+
+- name: restart hub
+  service: name='hub' state='restarted'

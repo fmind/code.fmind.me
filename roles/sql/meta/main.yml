@@ -1,0 +1,6 @@
+galaxy_info:
+  author: fmind
+  description: setup sql
+
+dependencies:
+  - {role: ANXS.postgresql}

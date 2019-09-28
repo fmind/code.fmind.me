@@ -1,0 +1,4 @@
+---
+
+- name: users group
+  group: name='{{hub_group}}' system=true

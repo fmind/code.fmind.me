@@ -1,0 +1,8 @@
+---
+
+- name: config dir
+  file: path='{{hub_conf|dirname}}' state='directory' owner='{{hub_user}}' group='{{hub_group}}' mode='0700'
+
+- name: config file
+  template: dest='{{hub_conf}}' src='templates/config.py.j2' owner='{{hub_user}}' group='{{hub_group}}' mode='0600'
+  notify: restart hub
