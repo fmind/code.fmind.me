@@ -1,10 +1,10 @@
 ---
 
 - name: nbgrader install
-  command: 'jupyter nbextension install --sys-prefix --py nbgrader --overwrite'
+  command: "jupyter nbextension install --sys-prefix --py nbgrader --overwrite"
 
 - name: nbgrader enable
-  command: 'jupyter nbextension enable --sys-prefix --py nbgrader'
+  command: "jupyter nbextension enable --sys-prefix --py nbgrader"
 
 - name: nbgrader server
-  command: 'jupyter serverextension enable --sys-prefix --py nbgrader'
+  command: "jupyter serverextension enable --sys-prefix --py nbgrader"

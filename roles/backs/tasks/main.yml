@@ -1,7 +1,18 @@
 ---
 
 - name: script
-  template: dest='/usr/local/bin/backup' src='templates/backup.j2' owner='root' group='root' mode='700'
+  template:
+    mode: 700
+    owner: root
+    group: root
+    dest: /usr/local/bin/backup
+    src: templates/backup.j2
 
 - name: schedule
-  cron: name='backup' user='root' hour='3' minute='0' job='/usr/local/bin/backup &>> /var/log/backup.log' cron_file='backup'
+  cron:
+    hour: 3
+    minute: 0
+    user: root
+    name: backup
+    cron_file: backup
+    job: "/usr/local/bin/backup &>> /var/log/backup.log"

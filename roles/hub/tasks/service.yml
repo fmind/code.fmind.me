@@ -1,8 +1,13 @@
 ---
 
 - name: service deploy
-  template: dest='{{hub_serv}}' src='templates/service.j2' mode='0640'
+  template:
+    mode: 0640
+    dest: "{{ hub_serv }}"
+    src: templates/service.j2
   notify: restart hub
 
 - name: service enable
-  service: name='hub' enabled=true
+  service:
+    name: hub
+    enabled: true

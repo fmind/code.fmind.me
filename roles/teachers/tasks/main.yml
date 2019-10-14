@@ -1,13 +1,27 @@
 # ---
 
 - name: users
-  user: name='{{item.user}}' groups='{{hub_group}}' shell='/bin/bash' append=true
-  with_items: '{{teachers_users}}'
+  user:
+    append: true
+    shell: /bin/bash
+    name: "{{ item.user }}"
+    groups: "{{ hub_group }}"
+  with_items: "{{ teachers_users }}"
 
 - name: courses
-  template: dest='/home/{{item.user}}/nbgrader_config.py' src='templates/nbgrader_config.py.j2' owner='{{item.user}}' group='{{hub_group}}' mode='0640'
-  with_items: '{{teachers_users}}'
+  template:
+    mode: 0640
+    owner: "{{ item.user }}"
+    group: "{{ hub_group }}"
+    src: templates/nbgrader_config.py.j2
+    dest: "/home/{{ item.user }}/nbgrader_config.py"
+  with_items: "{{ teachers_users }}"
 
 - name: exchanges
-  file: path='{{hub_srv}}/{{item}}' state='directory' owner='{{hub_user}}' group='{{hub_group}}' mode='0777'
-  with_items: '{{teachers_courses}}'
+  file:
+    mode: 0777
+    state: directory
+    owner: "{{ hub_user }}"
+    group: "{{ hub_group }}"
+    path: "{{ hub_srv }}/{{ item }}"
+  with_items: "{{ teachers_courses }}"

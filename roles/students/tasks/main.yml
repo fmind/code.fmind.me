@@ -1,9 +1,19 @@
 ---
 
 - name: members
-  user: name='{{item.user}}' groups='{{hub_group}}' password='{{item.pass|password_hash('sha512')}}' update_password='on_create' shell='/bin/bash'
-  with_items: '{{students_users}}'
+  user:
+    shell: /bin/bash
+    name: "{{ item.user }}"
+    groups: "{{ hub_group }}"
+    update_password: on_create
+    password: "{{ item.pass|password_hash('sha512') }}"
+  with_items: "{{ students_users }}"
 
 - name: courses
-  template: dest='/home/{{item.user}}/nbgrader_config.py' src='templates/nbgrader_config.py.j2' owner='{{item.user}}' group='{{hub_group}}' mode='0640'
-  with_items: '{{students_users}}'
+  template:
+    mode: 0640
+    owner: "{{ item.user }}"
+    group: "{{ hub_group }}"
+    src: templates/nbgrader_config.py.j2
+    dest: "/home/{{ item.user }}/nbgrader_config.py"
+  with_items: "{{ students_users }}"
